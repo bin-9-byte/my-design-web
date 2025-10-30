@@ -8,9 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   asChild?: boolean;
 }
 
-// cn函数已从@/lib/utils导入
-
-// Button组件
+// Button组件 - 简洁而强大
 const Button: React.FC<ButtonProps> = ({ 
   className,
   variant = 'default',
@@ -21,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   // 基础样式
   const baseStyles = 'inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
   
-  // 变体样式
+  // 变体样式映射
   const variantStyles = {
     default: 'bg-white text-black hover:bg-gray-200',
     destructive: 'bg-red-500 text-white hover:bg-red-600',
@@ -31,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
     link: 'text-white underline-offset-4 hover:underline',
   };
   
-  // 尺寸样式
+  // 尺寸样式映射
   const sizeStyles = {
     default: 'h-10 px-4 py-2',
     sm: 'h-9 rounded-md px-3',
@@ -39,18 +37,11 @@ const Button: React.FC<ButtonProps> = ({
     icon: 'h-10 w-10',
   };
   
+  // 根据asChild属性决定使用的元素类型
   const Comp = asChild ? 'span' : 'button';
   
   return (
-    <Comp
-      className={cn(
-        baseStyles,
-        variantStyles[variant],
-        sizeStyles[size],
-        className
-      )}
-      {...props}
-    />
+    <Comp className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)} {...props} />
   );
 };
 
