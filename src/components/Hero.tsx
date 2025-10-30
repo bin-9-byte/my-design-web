@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, easeInOut, easeOut } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import { Button } from './Button';
 
@@ -24,6 +25,9 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ theme }) => {
+  // 导航钩子
+  const navigate = useNavigate();
+  
   // 动画配置 - 简化为常量
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -63,7 +67,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
       >
         {/* 几何形状装饰 */}
         <motion.div className="mb-8 inline-block" variants={itemVariants}>
-          <div className="w-24 h-24 bg-white mx-auto" />
+          <div className={`w-24 h-24 mx-auto ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} border ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`} />
         </motion.div>
 
         {/* 标题 */}
@@ -72,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           variants={itemVariants}
         >
           <span className="block">Hello!</span>
-          <span className="block">I'm Bin Ma</span>
+          <span className="block">I'm Ma Bin</span>
         </motion.h1>
 
         {/* 副标题 */}
@@ -88,7 +92,23 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           variants={itemVariants}
         >
-          <Button variant="default" data-theme={theme}>查看我的项目</Button>
+          <Button 
+            variant="default" 
+            data-theme={theme}
+            onClick={() => {
+              // 导航到首页
+              navigate('/');
+              // 延迟滚动到作品部分，确保页面已切换
+              setTimeout(() => {
+                const portfolioSection = document.querySelector('[data-section="portfolio"]');
+                if (portfolioSection) {
+                  portfolioSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 100);
+            }}
+          >
+            查看我的项目
+          </Button>
           <Button variant="outline" data-theme={theme}>联系我</Button>
         </motion.div>
 

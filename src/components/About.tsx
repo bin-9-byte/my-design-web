@@ -17,7 +17,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     year: '2020 - 2022',
-    title: '前端开发工程师',
+    title: '游戏美术实习生',
     description: '负责Web应用的UI/UX设计和前端开发，使用React、TypeScript和Tailwind CSS构建响应式界面。'
   },
   {
