@@ -1,51 +1,109 @@
-# React + TypeScript + Vite
+# My Design Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+基于 React + TypeScript + Vite + Tailwind CSS 构建的现代化个人设计作品集网站。
 
-Currently, two official plugins are available:
+## ✨ 特性
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎨 优雅的设计风格
+  - 包豪斯风格的几何元素
+  - 流畅的动画过渡效果
+  - 精心设计的排版和间距
 
-## React Compiler
+- 🌓 智能主题系统
+  - 支持亮色/暗色主题切换
+  - 自动识别系统主题偏好
+  - 主题选择本地持久化
+  - 实时响应系统主题变化
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- 📱 响应式设计
+  - 完美适配桌面端和移动端
+  - 优雅的导航栏自适应
+  - 合理的内容布局调整
 
-Note: This will impact Vite dev & build performances.
+- 🎯 交互体验优化
+  - 平滑的页面滚动
+  - 渐进式内容加载
+  - 优雅的悬停效果
+  - 清晰的视觉反馈
 
-## Expanding the ESLint configuration
+## 🛠 技术栈
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **框架**: React 18 + TypeScript
+- **构建工具**: Vite
+- **样式解决方案**: Tailwind CSS
+- **动画**: Framer Motion
+- **图标**: Lucide React
+- **代码规范**: ESLint
+- **包管理**: npm
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 快速开始
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. 克隆项目
+```bash
+git clone https://github.com/bin-9-byte/my-design-web.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. 安装依赖
+```bash
+cd my-design-web
+npm install
+```
+
+3. 启动开发服务器
+```bash
+npm run dev
+```
+
+4. 构建生产版本
+```bash
+npm run build
+```
+
+## 📦 项目结构
+
+```
+my-design-web/
+├── src/
+│   ├── components/     # 可复用组件
+│   │   ├── Hero.tsx   # 首页主视觉
+│   │   ├── About.tsx  # 关于我
+│   │   ├── Portfolio.tsx  # 作品展示
+│   │   └── Button.tsx # 通用按钮
+│   ├── assets/        # 静态资源
+│   ├── lib/          # 工具函数
+│   ├── App.tsx       # 应用入口
+│   └── main.tsx      # 主入口
+├── public/           # 公共资源
+└── ...配置文件
+```
+
+## 🎯 主要功能
+
+- 🏠 **首页(Hero)**
+  - 动态几何背景
+  - 响应式标题与简介
+  - 社交媒体链接
+
+- 👤 **关于我(About)**
+  - 个人简介
+  - 工作经历时间线
+  - 技能展示进度条
+
+- 🎨 **作品集(Portfolio)**
+  - 网格布局展示
+  - 作品卡片动画
+  - 标签与分类
+
+## 📝 开发规范
+
+- 组件文件使用 Pascal Case (如 `Button.tsx`)
+- 工具函数使用 camelCase (如 `utils.ts`)
+- 遵循 ESLint 配置的代码规范
+- Commit message 遵循约定式提交规范
+
+## 📄 许可
+
+MIT © [Bin Ma](https://github.com/bin-9-byte)
 
 ```js
 // eslint.config.js
