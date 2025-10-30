@@ -37,15 +37,19 @@ const skills = [
   { name: 'Framer Motion', level: 83 },
 ];
 
-const About: React.FC = () => {
+interface AboutProps {
+  theme: 'light' | 'dark';
+}
+
+const About: React.FC<AboutProps> = ({ theme }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { 
+    visible: {
+      opacity: 1,
+      transition: {
         staggerChildren: 0.1,
         duration: 0.5
-      } 
+      }
     }
   };
 
@@ -58,8 +62,13 @@ const About: React.FC = () => {
     }
   };
 
+  // ASC2: 动态主题样式
+  const themeClass = theme === 'dark'
+    ? 'bg-black text-white'
+    : 'bg-white text-black';
+
   return (
-    <section className="min-h-screen bg-black text-white py-20">
+    <section className={`min-h-screen py-20 ${themeClass}`}>
       <div className="container mx-auto px-4">
         <motion.div
           className="max-w-4xl mx-auto"
@@ -81,7 +90,7 @@ const About: React.FC = () => {
             className="mb-20 text-center max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            <p className="text-xl text-gray-300 leading-relaxed">
+            <p className={`text-xl leading-relaxed ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
               我是一名充满激情的AIGC设计师和开发者，专注于将人工智能技术与创意设计相结合。
               拥有多年的前端开发和UI/UX设计经验，致力于创造既美观又实用的数字产品。
             </p>
@@ -89,21 +98,21 @@ const About: React.FC = () => {
 
           {/* 工作经历时间线 */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-2">工作经历</h3>
+            <h3 className={`text-3xl font-bold mb-10 pb-2 border-b ${theme === 'dark' ? 'border-gray-800' : 'border-gray-300'}`}>工作经历</h3>
             <div className="space-y-12">
               {timelineData.map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="relative pl-10 border-l border-gray-700"
+                  className={`relative pl-10 border-l ${theme === 'dark' ? 'border-gray-700' : 'border-gray-300'}`}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.2, duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white"></div>
-                  <div className="text-lg font-medium text-yellow-400 mb-2">{item.year}</div>
-                  <h4 className="text-2xl font-bold mb-3">{item.title}</h4>
-                  <p className="text-gray-400">{item.description}</p>
+                                    <span className={`absolute -left-4 top-0 w-8 h-8 rounded-full border-4 ${theme === 'dark' ? 'bg-yellow-400 border-black' : 'bg-yellow-300 border-white'}`} />
+                  <div className={`text-lg font-medium mb-2 ${theme === 'dark' ? 'text-yellow-400' : 'text-yellow-600'}`}>{item.year}</div>
+                  <h4 className={`text-2xl font-bold mb-3 ${theme === 'dark' ? '' : 'text-black'}`}>{item.title}</h4>
+                  <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -114,7 +123,7 @@ const About: React.FC = () => {
             className="mt-20"
             variants={itemVariants}
           >
-            <h3 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-2">专业技能</h3>
+            <h3 className={`text-3xl font-bold mb-10 pb-2 border-b ${theme === 'dark' ? 'border-gray-800' : 'border-gray-300'}`}>专业技能</h3>
             <div className="space-y-6">
               {skills.map((skill, index) => (
                 <motion.div 
@@ -126,12 +135,12 @@ const About: React.FC = () => {
                   viewport={{ once: true }}
                 >
                   <div className="flex justify-between mb-2">
-                    <span className="text-lg font-medium">{skill.name}</span>
-                    <span className="text-gray-400">{skill.level}%</span>
+                    <span className={`text-lg font-medium ${theme === 'dark' ? '' : 'text-black'}`}>{skill.name}</span>
+                    <span className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>{skill.level}%</span>
                   </div>
-                  <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div className={`h-2 rounded-full overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'}`}>
                     <motion.div 
-                      className="h-full bg-yellow-400"
+                      className={`h-full ${theme === 'dark' ? 'bg-yellow-400' : 'bg-yellow-300'}`}
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       transition={{ duration: 1, delay: 0.2 }}

@@ -65,7 +65,11 @@ const projects: Project[] = [
   }
 ];
 
-const Portfolio: React.FC = () => {
+interface PortfolioProps {
+  theme: 'light' | 'dark';
+}
+
+const Portfolio: React.FC<PortfolioProps> = ({ theme }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -86,8 +90,13 @@ const Portfolio: React.FC = () => {
     }
   };
 
+  // ASC2: 动态主题样式
+  const themeClass = theme === 'dark'
+    ? 'bg-black text-white'
+    : 'bg-white text-black';
+
   return (
-    <section className="min-h-screen bg-black text-white py-20">
+    <section className={`min-h-screen py-20 ${themeClass}`}>
       <div className="container mx-auto px-4">
         <motion.div
           className="max-w-6xl mx-auto"
@@ -116,7 +125,7 @@ const Portfolio: React.FC = () => {
             {projects.map((project) => (
               <motion.div
                 key={project.id}
-                className="bg-gray-900 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-yellow-400/10 transition-all duration-300"
+                className={`rounded-lg overflow-hidden hover:shadow-lg hover:shadow-yellow-400/10 transition-all duration-300 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
                 variants={itemVariants}
                 whileHover={{ y: -10 }}
                 initial={{ opacity: 0, y: 30 }}
@@ -138,15 +147,15 @@ const Portfolio: React.FC = () => {
                 
                 {/* 项目内容 */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3 text-yellow-400">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <h3 className={`text-2xl font-bold mb-3 ${theme === 'dark' ? 'text-yellow-400' : 'text-yellow-600'}`}>{project.title}</h3>
+                  <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'} mb-4`}>{project.description}</p>
                   
                   {/* 技术栈 */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="text-xs px-3 py-1 bg-gray-800 text-gray-300 rounded-full"
+                        className={`text-xs px-3 py-1 rounded-full ${theme === 'dark' ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'}`}
                       >
                         {tech}
                       </span>
@@ -162,7 +171,7 @@ const Portfolio: React.FC = () => {
                       href={project.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white transition-colors"
+                      className={`transition-colors ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}
                     >
                       <ExternalLink size={20} />
                     </a>

@@ -19,7 +19,11 @@ const socialIcons = [
 ];
 
 // 包豪斯风格的Hero组件
-const Hero: React.FC = () => {
+interface HeroProps {
+  theme: 'light' | 'dark';
+}
+
+const Hero: React.FC<HeroProps> = ({ theme }) => {
   // 动画配置 - 简化为常量
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -31,8 +35,13 @@ const Hero: React.FC = () => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: easeOut } }
   };
 
+  // ASC2: 动态主题样式
+  const themeClass = theme === 'dark'
+    ? 'bg-black text-white'
+    : 'bg-white text-black';
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden ${themeClass}`}>
       {/* 包豪斯风格的几何背景元素 */}
       <div className="absolute inset-0 overflow-hidden">
         {backgroundElements.map((elem, idx) => (
@@ -59,7 +68,7 @@ const Hero: React.FC = () => {
 
         {/* 标题 */}
         <motion.h1 
-          className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter"
+          className={`text-6xl md:text-8xl font-bold mb-6 tracking-tighter ${theme === 'dark' ? 'text-white' : 'text-black'}`}
           variants={itemVariants}
         >
           <span className="block">Hello!</span>
@@ -68,10 +77,10 @@ const Hero: React.FC = () => {
 
         {/* 副标题 */}
         <motion.h2 
-          className="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto"
+          className={`text-xl md:text-2xl mb-10 max-w-2xl mx-auto ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
           variants={itemVariants}
         >
-          Aigc 设计师 & 开发者
+          Aigc 设计师 & 独立开发者
         </motion.h2>
 
         {/* 按钮组 */}
@@ -79,14 +88,22 @@ const Hero: React.FC = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           variants={itemVariants}
         >
-          <Button variant="default">查看我的项目</Button>
-          <Button variant="outline">联系我</Button>
+          <Button variant="default" data-theme={theme}>查看我的项目</Button>
+          <Button variant="outline" data-theme={theme}>联系我</Button>
         </motion.div>
 
         {/* 社交媒体图标 */}
         <motion.div className="flex justify-center gap-6" variants={itemVariants}>
           {socialIcons.map(({ Icon, href }, idx) => (
-            <a key={idx} href={href} className="text-white hover:text-gray-300 transition-colors">
+            <a 
+              key={idx} 
+              href={href} 
+              className={`transition-colors ${
+                theme === 'dark' 
+                  ? 'text-white hover:text-gray-300' 
+                  : 'text-black hover:text-gray-600'
+              }`}
+            >
               <Icon size={24} />
             </a>
           ))}
