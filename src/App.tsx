@@ -59,19 +59,19 @@ type Page = 'home' | 'about' | 'portfolio';
             {/* 导航链接 */}
             <div className="hidden md:flex space-x-8">
               <button 
-                onClick={() => scrollToSection(homeRef)}
+                onClick={() => scrollToSection(homeRef as React.RefObject<HTMLDivElement>)}
                 className={`text-lg font-medium transition-colors ${currentPage === 'home' ? 'text-yellow-400' : 'text-gray-300 hover:text-white'}`}
               >
                 首页
               </button>
               <button 
-                onClick={() => scrollToSection(aboutRef)}
+                onClick={() => scrollToSection(aboutRef as React.RefObject<HTMLDivElement>)}
                 className={`text-lg font-medium transition-colors ${currentPage === 'about' ? 'text-yellow-400' : 'text-gray-300 hover:text-white'}`}
               >
                 关于我
               </button>
               <button 
-                onClick={() => scrollToSection(portfolioRef)}
+                onClick={() => scrollToSection(portfolioRef as React.RefObject<HTMLDivElement>)}
                 className={`text-lg font-medium transition-colors ${currentPage === 'portfolio' ? 'text-yellow-400' : 'text-gray-300 hover:text-white'}`}
               >
                 作品
@@ -96,7 +96,7 @@ type Page = 'home' | 'about' | 'portfolio';
           <div className="flex flex-col space-y-4">
             <button 
               onClick={() => {
-                scrollToSection(homeRef);
+                scrollToSection(homeRef as React.RefObject<HTMLDivElement>);
                 setMobileMenuOpen(false);
               }}
               className={`text-lg font-medium transition-colors ${currentPage === 'home' ? 'text-yellow-400' : 'text-gray-300 hover:text-white'}`}
@@ -105,7 +105,7 @@ type Page = 'home' | 'about' | 'portfolio';
             </button>
             <button 
               onClick={() => {
-                scrollToSection(aboutRef);
+                scrollToSection(aboutRef as React.RefObject<HTMLDivElement>);
                 setMobileMenuOpen(false);
               }}
               className={`text-lg font-medium transition-colors ${currentPage === 'about' ? 'text-yellow-400' : 'text-gray-300 hover:text-white'}`}
@@ -114,7 +114,7 @@ type Page = 'home' | 'about' | 'portfolio';
             </button>
             <button 
               onClick={() => {
-                scrollToSection(portfolioRef);
+                scrollToSection(portfolioRef as React.RefObject<HTMLDivElement>);
                 setMobileMenuOpen(false);
               }}
               className={`text-lg font-medium transition-colors ${currentPage === 'portfolio' ? 'text-yellow-400' : 'text-gray-300 hover:text-white'}`}
